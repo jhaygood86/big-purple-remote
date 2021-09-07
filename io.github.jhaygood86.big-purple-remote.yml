@@ -1,0 +1,43 @@
+app-id: io.github.jhaygood86.big-purple-remote
+runtime: io.elementary.Platform
+runtime-version: '6'
+sdk: io.elementary.Sdk
+command: io.github.jhaygood86.big-purple-remote
+finish-args:
+  - '--share=network'
+  - '--device=dri'
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+
+cleanup:
+- '/include'
+- '/lib/pkgconfig'
+- '/share/vala'
+- '*.a'
+- '*.la'
+
+modules:
+  - name: gssdp
+    buildsystem: meson
+    sources:
+    - type: archive
+      url: https://download.gnome.org/sources/gssdp/1.2/gssdp-1.2.3.tar.xz
+      sha256: a263dcb6730e3b3dc4bbbff80cf3fab4cd364021981d419db6dd5a8e148aa7e8
+  - name: gupnp
+    buildsystem: meson
+    sources:
+    - type: archive
+      url: https://download.gnome.org/sources/gupnp/1.2/gupnp-1.2.4.tar.xz
+      sha256: f7a0307ea51f5e44d1b832f493dd9045444a3a4e211ef85dfd9aa5dd6eaea7d1
+  - name: gxml
+    buildsystem: meson
+    sources:
+    - type: archive
+      url: https://download.gnome.org/sources/gxml/0.20/gxml-0.20.0.tar.xz
+      sha256: 0a0fc4f305ba9ea2f1f76aadfd660fd50febdc7a5e151f9559c81b2bd362d87b
+  - name: big-purple-remote
+    buildsystem: meson
+    sources:
+    - type: dir
+      path: .

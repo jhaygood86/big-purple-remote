@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/io/github/jhaygood86/big-purple-remote/" id="io.github.jhaygood86.big-purple-remote">
+    <key name="last-used-device-usn" type="s">
+      <default>""</default>
+      <summary>Last Used Device USN</summary>
+      <description>Stores the USN of the last used Roku device</description>
+    </key>
+  </schema>
+</schemalist>
