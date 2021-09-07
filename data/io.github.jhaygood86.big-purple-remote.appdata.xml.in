@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.jhaygood86.big-purple-remote</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Big Purple Remote</name>
+  <summary>Remote for Roku® devices</summary>
+  <description>
+    <p>
+      Allows you to remotely control your Roku® devices over your local network.
+    </p>
+    <p>
+      ROKU, the ROKU Logo, STREAMING STICK, ROKU TV, ROKU POWERED, the ROKU POWERED Logo, ROKU READY, the ROKU READY Logo, "STOP DREAMING. START STREAMING.", "HAPPY STREAMING", "THERE'S A TON OF ENTERTAINMENT IN THIS LITTLE BOX," and "NOW THIS IS TV" are trademarks and/or registered trademarks of Roku, Inc. in the United States and other countries.
+    </p>
+  </description>
+  <releases>
+    <release version="0.1.0" date="2021-09-07" urgency="medium">
+      <description>
+        <p>Initial Release</p>
+        <ul>
+          <li>Supports multiple Roku devices on the network</li>
+          <li>Controls basic functionality: navigation and media controls</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+  <provides>
+    <binary>io.github.jhaygood86.big-purple-remote</binary>
+  </provides>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/jhaygood86/big-purple-remote/main/data/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <translation type="gettext">io.github.jhaygood86.big-purple-remote</translation>
+  <developer_name>Justin Haygood</developer_name>
+  <url type="homepage">https://jhaygood86.github.io/big-purple-remote/</url>
+  <url type="bugtracker">https://github.com/jhaygood86/big-purple-remote/issues</url>
+  <custom>
+    <value key="x-appcenter-color-primary">#7239b3</value>
+    <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
+    <value key="x-appcenter-suggested-price">8</value>
+    <value key="x-appcenter-stripe">pk_live_51JQWYDHZX5xcE5RZsPJymrVxQa2FF1xD2mCl9dsb4JMhFJPJN9WKwTVuHMzOGx8y1tzjLknRIuDA7iRiIuAVQYS1003BJHg0C1</value>
+  </custom>
+</component>

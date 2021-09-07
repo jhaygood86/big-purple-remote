@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Big Purple Remote
+GenericName=Streaming Device Remote
+Comment=Control your Roku® device from your PC
+Categories=AudioVideo;Audio;Video
+Exec=io.github.jhaygood86.big-purple-remote
+Icon=io.github.jhaygood86.big-purple-remote
+Terminal=false
+Type=Application
+Keywords=Remote;TV;Roku
