@@ -1,5 +1,5 @@
-# big purple remote
-Big Purple Remote, a elementary OS application to control your Roku devices
+# Big Purple Remote
+Big Purple Remote, an elementary OS application to control your Roku devices
 
 ![Screenshot](https://raw.githubusercontent.com/jhaygood86/big-purple-remote/main/data/screenshot.png)
 
@@ -30,7 +30,7 @@ To install, use `ninja install`, then execute with `io.github.jhaygood86.big-pur
 You can also build and run with flatpak, which already has all of its dependencies defined as well
 
 ```bash
-flatpak-builder build  io.github.jhaygood86.big-purple-remote.yml --user --install --force-clean
+flatpak-builder build io.github.jhaygood86.big-purple-remote.yml --user --install --force-clean
 flatpak run io.github.jhaygood86.big-purple-remote
 ```
 
