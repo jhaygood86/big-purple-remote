@@ -20,22 +20,28 @@ cleanup:
 modules:
   - name: gssdp
     buildsystem: meson
+    config-opts:
+    - '-Dsniffer=false'
+    - '-Dgtk_doc=false'
     sources:
     - type: archive
-      url: https://download.gnome.org/sources/gssdp/1.2/gssdp-1.2.3.tar.xz
-      sha256: a263dcb6730e3b3dc4bbbff80cf3fab4cd364021981d419db6dd5a8e148aa7e8
+      url: https://download.gnome.org/sources/gssdp/1.3/gssdp-1.3.1.tar.xz
+      sha256: affbf145c26e02dda9d31f9da9fd5182bd2cc36565ab8ee2e877567b2fd206cd
+
   - name: gupnp
     buildsystem: meson
     sources:
     - type: archive
-      url: https://download.gnome.org/sources/gupnp/1.2/gupnp-1.2.4.tar.xz
-      sha256: f7a0307ea51f5e44d1b832f493dd9045444a3a4e211ef85dfd9aa5dd6eaea7d1
+      url: https://download.gnome.org/sources/gupnp/1.3/gupnp-1.3.1.tar.xz
+      sha256: df70fe8321bfc53cadb6860edcff2e0dc456ec81899b463f41723684803d1408
+
   - name: gxml
     buildsystem: meson
     sources:
     - type: archive
       url: https://download.gnome.org/sources/gxml/0.20/gxml-0.20.0.tar.xz
       sha256: 0a0fc4f305ba9ea2f1f76aadfd660fd50febdc7a5e151f9559c81b2bd362d87b
+
   - name: big-purple-remote
     buildsystem: meson
     sources:

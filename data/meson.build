@@ -29,7 +29,7 @@ endif
 i18n.merge_file(
     input: 'io.github.jhaygood86.big-purple-remote.desktop.in',
     output: 'io.github.jhaygood86.big-purple-remote.desktop',
-    po_dir: join_paths(meson.source_root(), 'po', 'extra'),
+    po_dir: join_paths(meson.source_root(), 'po'),
     type: 'desktop',
     install: true,
     install_dir: join_paths(get_option('datadir'), 'applications')
@@ -38,7 +38,7 @@ i18n.merge_file(
 i18n.merge_file(
     input: 'io.github.jhaygood86.big-purple-remote.appdata.xml.in',
     output: 'io.github.jhaygood86.big-purple-remote.appdata.xml',
-    po_dir: join_paths(meson.source_root(), 'po', 'extra'),
+    po_dir: join_paths(meson.source_root(), 'po'),
     type: 'xml',
     install: true,
     install_dir: join_paths(get_option('datadir'), 'metainfo'),
