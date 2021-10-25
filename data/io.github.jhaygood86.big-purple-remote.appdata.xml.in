@@ -18,7 +18,7 @@
       <description>
         <p>Improvements</p>
         <ul>
-          <li>Dvice discovery now longer freezes the UI</li>
+          <li>Device discovery now longer freezes the UI</li>
           <li>Devices will now only be added once we get a signal lock. No more blank phantom entries!</li>
           <li>Devices will now only show up once in the device dropdown. No more duplicate entries!</li>
         </ul>
