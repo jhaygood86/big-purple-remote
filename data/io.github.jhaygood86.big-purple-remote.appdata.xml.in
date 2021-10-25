@@ -14,12 +14,13 @@
     </p>
   </description>
   <releases>
-    <release version="0.1.0" date="2021-09-07" urgency="medium">
+    <release version="0.1.1" date="2021-10-25" urgency="medium">
       <description>
-        <p>Initial Release</p>
+        <p>Improvements</p>
         <ul>
-          <li>Supports multiple Roku devices on the network</li>
-          <li>Controls basic functionality: navigation and media controls</li>
+          <li>Dvice discovery now longer freezes the UI</li>
+          <li>Devices will now only be added once we get a signal lock. No more blank phantom entries!</li>
+          <li>Devices will now only show up once in the device dropdown. No more duplicate entries!</li>
         </ul>
       </description>
     </release>
