@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.big-purple-remote\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-19 11:03-0400\n"
+"POT-Creation-Date: 2021-10-25 10:09-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,17 +94,25 @@ msgid ""
 msgstr ""
 
 #: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:19
-msgid "Initial Release"
+msgid "Improvements"
 msgstr ""
 
 #: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:21
-msgid "Supports multiple Roku devices on the network"
+msgid "Device discovery now longer freezes the UI"
 msgstr ""
 
 #: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:22
-msgid "Controls basic functionality: navigation and media controls"
+msgid ""
+"Devices will now only be added once we get a signal lock. No more blank "
+"phantom entries!"
 msgstr ""
 
-#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:64
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:23
+msgid ""
+"Devices will now only show up once in the device dropdown. No more duplicate "
+"entries!"
+msgstr ""
+
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:65
 msgid "Justin Haygood"
 msgstr ""
