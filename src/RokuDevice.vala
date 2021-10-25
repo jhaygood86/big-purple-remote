@@ -12,8 +12,6 @@ public class RokuDevice : Object {
 
         _session = new Soup.Session ();
 
-        load_device_info ();
-
         this.notify["is-active"].connect(() => {
 
             load_media_player ();
@@ -42,19 +40,20 @@ public class RokuDevice : Object {
     public Gdk.Pixbuf? icon_pixbuf { get; set; }
 
     public signal void play_state_changed (bool is_playing);
+    public signal void device_info_loaded ();
 
-    private void load_device_info(){
+    public async void load_device_info(){
         var device_info_url = "%squery/device-info".printf(_location);
 
-        var message = new Soup.Message("GET",device_info_url);
+        var response_data = yield http_get_string_async (device_info_url);
 
-        _session.send_message(message);
+        if (response_data == null) {
+            return;
+        }
 
-        print("device info:\n%s\n",(string)message.response_body.data);
+        print ("device info:\n%s\n", response_data);
 
-        var memory_input_stream = new MemoryInputStream.from_data(message.response_body.data);
-
-        var document = new GXml.Document.from_stream(memory_input_stream);
+        var document = new GXml.Document.from_string (response_data);
 
         name = get_node_value(document,"friendly-device-name");
 
@@ -77,6 +76,8 @@ public class RokuDevice : Object {
         }
 
         model_name = get_node_value(document,"friendly-model-name");
+
+        device_info_loaded ();
     }
 
     private void load_media_player() {
@@ -84,11 +85,18 @@ public class RokuDevice : Object {
 
         var message = new Soup.Message("GET",media_player_info_url);
 
-        print("sending message\n");
+        print("sending message for %s to %s\n", usn, media_player_info_url);
 
         _session.queue_message(message, (sess,mess) => {
 
-            print("received message\n");
+            print("received message for %s, status code: %u\n",usn,mess.status_code);
+
+            var is_successful = mess.status_code >= 200 && mess.status_code < 300;
+
+            if (!is_successful) {
+                print ("did not receive success status. not proceeding");
+                return;
+            }
 
             var response_xml = (string) mess.response_body.data;
             print ("%s\n",response_xml);
@@ -227,5 +235,41 @@ public class RokuDevice : Object {
         var app_node = document.query_selector("app");
 
         application_name = app_node.text_content;
+    }
+
+    private async string? http_get_string_async (string url) throws Gee.FutureError {
+
+        print ("fetching url %s\n", url);
+
+        var message = new Soup.Message ("GET", url);
+
+        var message_promise = new Gee.Promise<string?> ();
+
+        _session.queue_message(message, (sess,mess) => {
+
+            print("received message for %s, status code: %u\n",usn,mess.status_code);
+
+            var is_successful = mess.status_code >= 200 && mess.status_code < 300;
+
+            if (!is_successful) {
+                print ("did not receive success status. not proceeding\n");
+
+                message_promise.set_value (null);
+
+                return;
+            }
+
+            var response_data = (string)mess.response_body.data;
+
+            print ("received response: %s\n", response_data);
+
+            message_promise.set_value (response_data);
+        });
+
+        var value = yield message_promise.future.wait_async ();
+
+        print ("future resolved\n");
+
+        return value;
     }
 }

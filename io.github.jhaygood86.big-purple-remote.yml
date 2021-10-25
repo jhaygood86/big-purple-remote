@@ -24,23 +24,26 @@ modules:
     - '-Dsniffer=false'
     - '-Dgtk_doc=false'
     sources:
-    - type: archive
-      url: https://download.gnome.org/sources/gssdp/1.3/gssdp-1.3.1.tar.xz
-      sha256: affbf145c26e02dda9d31f9da9fd5182bd2cc36565ab8ee2e877567b2fd206cd
+    - type: git
+      url: https://gitlab.gnome.org/GNOME/gssdp.git
+      tag: gssdp-1.4.0.1
+      commit: 4e742a15cde4c330828d17c14185080cd7a6e9a0
 
   - name: gupnp
     buildsystem: meson
     sources:
-    - type: archive
-      url: https://download.gnome.org/sources/gupnp/1.3/gupnp-1.3.1.tar.xz
-      sha256: df70fe8321bfc53cadb6860edcff2e0dc456ec81899b463f41723684803d1408
+    - type: git
+      url: https://gitlab.gnome.org/GNOME/gupnp.git
+      tag: gupnp-1.4.0
+      commit: 0175039d71cd72ee8c9b718e752d3fa81851359c
 
   - name: gxml
     buildsystem: meson
     sources:
-    - type: archive
-      url: https://download.gnome.org/sources/gxml/0.20/gxml-0.20.0.tar.xz
-      sha256: 0a0fc4f305ba9ea2f1f76aadfd660fd50febdc7a5e151f9559c81b2bd362d87b
+    - type: git
+      url: https://gitlab.gnome.org/GNOME/gxml.git
+      tag: 0.20.1
+      commit: cff5b4ed5dd20d5aca66a8b35b6f26f3909ef14d
 
   - name: big-purple-remote
     buildsystem: meson

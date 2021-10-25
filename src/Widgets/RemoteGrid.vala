@@ -159,6 +159,9 @@ public class RemoteGrid : Gtk.Grid {
 	}
 
 	private void device_added (string usn){
+
+	    print ("remote grid, device added %s\n", usn);
+
         string current_usn = settings.get_string("last-used-device-usn");
 
         if(current_usn == usn && device_list.active_id == null){

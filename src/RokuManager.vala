@@ -63,25 +63,49 @@ public class RokuManager : Object {
 
         print ("found device: %s\n", usn);
 
-        var roku_device = new RokuDevice(usn,locations);
-        roku_device_map.set(usn,roku_device);
+        lock (roku_device_map) {
+            if (roku_device_map.has_key (usn)) {
+                var existing_roku_device = roku_device_map[usn];
+                existing_roku_device.load_device_info.begin();
+                return;
+            }
 
-        Gtk.TreeIter? device_row;
+            var roku_device = new RokuDevice(usn,locations);
+            roku_device_map[usn] = roku_device;
 
-        _roku_devices.insert_with_values(out device_row,-1,0,roku_device.name,1,roku_device.usn);
-        roku_device_row_map.set(usn,device_row);
+            roku_device.load_device_info.begin ();
 
-        device_added (usn);
+            roku_device.device_info_loaded.connect(() => {
+
+                lock (roku_device_row_map) {
+                    if (!roku_device_row_map.has_key (usn)) {
+
+                        Gtk.TreeIter? device_row;
+                        _roku_devices.insert_with_values (out device_row, -1, 0, roku_device.name, 1, roku_device.usn);
+
+                        roku_device_row_map[usn] = device_row;
+
+                        device_added (usn);
+                    }
+                }
+            });
+        }
     }
 
     private void resource_unavailable_cb(GSSDP.ResourceBrowser resource_browser, string usn){
-        roku_device_map.unset(usn);
 
-        var tree_iter = roku_device_row_map.get(usn);
-        _roku_devices.remove(ref tree_iter);
+        lock (roku_device_map) {
+            roku_device_map.unset(usn);
 
-        roku_device_row_map.unset(usn);
+            lock (roku_device_row_map) {
+                if (roku_device_row_map.has_key (usn)) {
+                    var tree_iter = roku_device_row_map[usn];
+                    _roku_devices.remove (ref tree_iter);
+                    roku_device_row_map.unset (usn);
+                }
+            }
 
-        device_removed ();
+            device_removed ();
+        }
     }
 }
