@@ -14,6 +14,14 @@
     </p>
   </description>
   <releases>
+    <release version="0.2.0" date="2021-11-26" urgency="medium">
+      <description>
+        <p>New Features</p>
+        <ul>
+          <li>Support for adjusting volume on TVs</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.1" date="2021-10-25" urgency="medium">
       <description>
         <p>Improvements</p>

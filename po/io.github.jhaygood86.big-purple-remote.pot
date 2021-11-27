@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.big-purple-remote\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 10:09-0400\n"
+"POT-Creation-Date: 2021-11-26 23:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,39 +23,51 @@ msgstr ""
 msgid "Big Purple Remote"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:62
+#: src/Widgets/RemoteGrid.vala:63
 msgid "Power"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:64
-msgid "Back"
-msgstr ""
-
 #: src/Widgets/RemoteGrid.vala:65
-msgid "Settings"
+msgid "Lower Volume"
 msgstr ""
 
 #: src/Widgets/RemoteGrid.vala:66
+msgid "Mute"
+msgstr ""
+
+#: src/Widgets/RemoteGrid.vala:67
+msgid "Raise Volume"
+msgstr ""
+
+#: src/Widgets/RemoteGrid.vala:69
+msgid "Back"
+msgstr ""
+
+#: src/Widgets/RemoteGrid.vala:70
+msgid "Settings"
+msgstr ""
+
+#: src/Widgets/RemoteGrid.vala:71
 msgid "Home"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:76
+#: src/Widgets/RemoteGrid.vala:81
 msgid "OK"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:83
+#: src/Widgets/RemoteGrid.vala:88
 msgid "Rewind"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:84
+#: src/Widgets/RemoteGrid.vala:89
 msgid "Pause"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:85
+#: src/Widgets/RemoteGrid.vala:90
 msgid "Play"
 msgstr ""
 
-#: src/Widgets/RemoteGrid.vala:86
+#: src/Widgets/RemoteGrid.vala:91
 msgid "Fast Forward"
 msgstr ""
 
@@ -94,25 +106,33 @@ msgid ""
 msgstr ""
 
 #: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:19
-msgid "Improvements"
+msgid "New Features"
 msgstr ""
 
 #: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:21
+msgid "Support for adjusting volume on TVs"
+msgstr ""
+
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:27
+msgid "Improvements"
+msgstr ""
+
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:29
 msgid "Device discovery now longer freezes the UI"
 msgstr ""
 
-#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:22
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:30
 msgid ""
 "Devices will now only be added once we get a signal lock. No more blank "
 "phantom entries!"
 msgstr ""
 
-#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:23
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:31
 msgid ""
 "Devices will now only show up once in the device dropdown. No more duplicate "
 "entries!"
 msgstr ""
 
-#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:65
+#: data/io.github.jhaygood86.big-purple-remote.appdata.xml.in:73
 msgid "Justin Haygood"
 msgstr ""

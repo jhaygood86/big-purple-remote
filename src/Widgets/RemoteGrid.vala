@@ -59,11 +59,16 @@ public class RemoteGrid : Gtk.Grid {
     }
 
     private void create_and_attach_buttons () {
+
         create_and_attach_button(_("Power"), "system-shutdown-symbolic", "PowerToggle", 3, 1, 1);
 
-        create_and_attach_button(_("Back"), "edit-undo-symbolic", "Back", 4, 0, 1);
-        create_and_attach_button(_("Settings"), "open-menu-symbolic", "Info", 4, 1, 1);
-        create_and_attach_button(_("Home"), "user-home-symbolic", "Home", 4, 2, 1);
+        create_and_attach_button(_("Lower Volume"), "audio-volume-low-symbolic", "VolumeDown", 4, 0, 1);
+        create_and_attach_button(_("Mute"), "audio-volume-muted-symbolic", "VolumeMute", 4, 1, 1);
+        create_and_attach_button(_("Raise Volume"), "audio-volume-high-symbolic", "VolumeUp", 4, 2, 1);
+
+        create_and_attach_button(_("Back"), "edit-undo-symbolic", "Back", 5, 0, 1);
+        create_and_attach_button(_("Settings"), "open-menu-symbolic", "Info", 5, 1, 1);
+        create_and_attach_button(_("Home"), "user-home-symbolic", "Home", 5, 2, 1);
 
         var dpad_grid = new Gtk.Grid () {
             hexpand = false,
@@ -78,12 +83,12 @@ public class RemoteGrid : Gtk.Grid {
 
         var down_btn = create_and_attach_button(null, "go-down-symbolic", "Down", 2, 1, 1, dpad_grid);
 
-        attach (dpad_grid, 0, 5, 3);
+        attach (dpad_grid, 0, 6, 3);
 
-        create_and_attach_button(_("Rewind"), "media-seek-backward-symbolic", "Rev", 6, 0, 1);
-        create_and_attach_button(_("Pause"), "media-playback-pause-symbolic", "Pause", 6, 1, 1);
-        create_and_attach_button(_("Play"), "media-playback-start-symbolic", "Play", 6, 1, 1).visible = false;
-        create_and_attach_button(_("Fast Forward"), "media-seek-forward-symbolic", "Fwd", 6, 2, 1);
+        create_and_attach_button(_("Rewind"), "media-seek-backward-symbolic", "Rev", 7, 0, 1);
+        create_and_attach_button(_("Pause"), "media-playback-pause-symbolic", "Pause", 7, 1, 1);
+        create_and_attach_button(_("Play"), "media-playback-start-symbolic", "Play", 7, 1, 1).visible = false;
+        create_and_attach_button(_("Fast Forward"), "media-seek-forward-symbolic", "Fwd", 7, 2, 1);
 
         set_dpad_style (up_btn);
         set_dpad_style (left_btn);
@@ -151,8 +156,10 @@ public class RemoteGrid : Gtk.Grid {
 
         var roku_device = roku_manager.set_active_device(device_list.active_id);
 
-        var power_button = button_map["PowerToggle"];
-        power_button.visible = roku_device.is_television;
+        button_map["PowerToggle"].visible = roku_device.is_television;
+        button_map["VolumeDown"].visible = roku_device.is_television;
+        button_map["VolumeMute"].visible = roku_device.is_television;
+        button_map["VolumeUp"].visible = roku_device.is_television;
 
         set_channel_name (roku_device);
         set_channel_icon (roku_device);
