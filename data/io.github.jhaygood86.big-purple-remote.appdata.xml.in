@@ -14,6 +14,14 @@
     </p>
   </description>
   <releases>
+    <release version="0.3.0" date="2022-02-21" urgency="medium">
+        <description>
+        <p>Improvements</p>
+        <ul>
+            <li>Update for elementary 7.1 platform</li>
+        </ul>
+        </description>
+    </release>
     <release version="0.2.0" date="2021-11-26" urgency="medium">
       <description>
         <p>New Features</p>
