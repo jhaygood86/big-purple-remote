@@ -1,6 +1,6 @@
 app-id: io.github.jhaygood86.big-purple-remote
 runtime: io.elementary.Platform
-runtime-version: '6'
+runtime-version: '7.1'
 sdk: io.elementary.Sdk
 command: io.github.jhaygood86.big-purple-remote
 finish-args:
@@ -23,27 +23,29 @@ modules:
     config-opts:
     - '-Dsniffer=false'
     - '-Dgtk_doc=false'
+    - -Dexamples=false
+    - -Dmanpages=false
     sources:
     - type: git
       url: https://gitlab.gnome.org/GNOME/gssdp.git
-      tag: gssdp-1.4.0.1
-      commit: 4e742a15cde4c330828d17c14185080cd7a6e9a0
+      tag: gssdp-1.6.2
+      commit: c2d417d6a79f03c095e5730efd60015eb3109a82
 
   - name: gupnp
     buildsystem: meson
     sources:
     - type: git
       url: https://gitlab.gnome.org/GNOME/gupnp.git
-      tag: gupnp-1.4.0
-      commit: 0175039d71cd72ee8c9b718e752d3fa81851359c
+      tag: gupnp-1.6.3
+      commit: adb51197a7e3120027a295b36beda4571e628758
 
   - name: gxml
     buildsystem: meson
     sources:
     - type: git
       url: https://gitlab.gnome.org/GNOME/gxml.git
-      tag: 0.20.1
-      commit: cff5b4ed5dd20d5aca66a8b35b6f26f3909ef14d
+      tag: 0.20.3
+      commit: 3582c7eabf464ebd256a8f8ccbfc40f69800b222
 
   - name: big-purple-remote
     buildsystem: meson

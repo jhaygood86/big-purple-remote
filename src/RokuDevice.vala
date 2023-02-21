@@ -44,16 +44,11 @@ public class RokuDevice : Object {
 
     public async void load_device_info(){
         var device_info_url = "%squery/device-info".printf(_location);
+        
+        var message = new Soup.Message("GET",device_info_url);
+        var input_stream = yield _session.send_async(message, Priority.DEFAULT, null);
 
-        var response_data = yield http_get_string_async (device_info_url);
-
-        if (response_data == null) {
-            return;
-        }
-
-        print ("device info:\n%s\n", response_data);
-
-        var document = new GXml.Document.from_string (response_data);
+        var document = new GXml.Document.from_stream (input_stream);
 
         name = get_node_value(document,"friendly-device-name");
 
@@ -80,67 +75,62 @@ public class RokuDevice : Object {
         device_info_loaded ();
     }
 
-    private void load_media_player() {
+    private async void load_media_player() {
         var media_player_info_url = "%squery/media-player".printf(location);
 
         var message = new Soup.Message("GET",media_player_info_url);
 
         print("sending message for %s to %s\n", usn, media_player_info_url);
+        
+        var input_stream = yield _session.send_async(message, Priority.DEFAULT, null);
 
-        _session.queue_message(message, (sess,mess) => {
+        print("received message for %s, status code: %u\n",usn,message.status_code);
 
-            print("received message for %s, status code: %u\n",usn,mess.status_code);
+        var is_successful = message.status_code >= 200 && message.status_code < 300;
 
-            var is_successful = mess.status_code >= 200 && mess.status_code < 300;
+        if (!is_successful) {
+            print ("did not receive success status. not proceeding");
+            return;
+        }
 
-            if (!is_successful) {
-                print ("did not receive success status. not proceeding");
-                return;
-            }
+        var document = new GXml.Document.from_stream(input_stream);
 
-            var response_xml = (string) mess.response_body.data;
-            print ("%s\n",response_xml);
+        var player_element = document.query_selector("player");
+        var state_attribute = player_element.get_attribute("state");
 
-            var memory_input_stream = new MemoryInputStream.from_data(mess.response_body.data);
-            var document = new GXml.Document.from_stream(memory_input_stream);
+        print("play state: %s\n",state_attribute);
 
-            var player_element = document.query_selector("player");
-            var state_attribute = player_element.get_attribute("state");
+        var current_state = is_playing;
 
-            print("play state: %s\n",state_attribute);
+        if(state_attribute == "play") {
+            is_playing = true;
+        } else {
+            is_playing = false;
+        }
 
-            var current_state = is_playing;
+        if (current_state != is_playing) {
+            play_state_changed(is_playing);
+        }
 
-            if(state_attribute == "play") {
-                is_playing = true;
-            } else {
-                is_playing = false;
-            }
+        var plugin_element = document.query_selector("plugin");
 
-            if (current_state != is_playing) {
-                play_state_changed(is_playing);
-            }
+        if( plugin_element != null) {
 
-            var plugin_element = document.query_selector("plugin");
+            print("plugin element is not null\n");
 
-            if( plugin_element != null) {
+            channel_name = plugin_element.get_attribute("name");
+            channel_id = int.parse(plugin_element.get_attribute("id"));
 
-                print("plugin element is not null\n");
+            print("channel name: %s\n",channel_name);
+            print("channel id: %d\n",channel_id);
 
-                channel_name = plugin_element.get_attribute("name");
-                channel_id = int.parse(plugin_element.get_attribute("id"));
-
-                print("channel name: %s\n",channel_name);
-                print("channel id: %d\n",channel_id);
-
-            } else {
-                channel_name = null;
-                channel_id = 0;
-            }
-        });
+        } else {
+            channel_name = null;
+            channel_id = 0;
+        }
     }
 
-    private void load_channel_icon () {
+    private async void load_channel_icon () {
 
         print ("load channel icon for channel id: %d",channel_id);
 
@@ -152,20 +142,18 @@ public class RokuDevice : Object {
         var channel_icon_url = "%squery/icon/%d".printf(location,channel_id);
 
         var message = new Soup.Message("GET",channel_icon_url);
+        
+        var stream = yield _session.send_async(message, Priority.DEFAULT, null);
 
-        _session.queue_message(message,(sess,mess) => {
-            var stream = new MemoryInputStream.from_data(mess.response_body.data);
+        var pixbuf = new Gdk.Pixbuf.from_stream (stream);
 
-            var pixbuf = new Gdk.Pixbuf.from_stream (stream);
+        print("size: %d x %d\n",pixbuf.width,pixbuf.height);
 
-            print("size: %d x %d\n",pixbuf.width,pixbuf.height);
+        var target_height = (int)((125 / (double)pixbuf.width) * pixbuf.height);
 
-            var target_height = (int)((125 / (double)pixbuf.width) * pixbuf.height);
+        print("target height %d\n",target_height);
 
-            print("target height %d\n",target_height);
-
-            icon_pixbuf = pixbuf.scale_simple(125, target_height, Gdk.InterpType.BILINEAR);
-        });
+        icon_pixbuf = pixbuf.scale_simple(125, target_height, Gdk.InterpType.BILINEAR);
     }
 
     private bool on_mediaplayer_timer () {
@@ -216,60 +204,20 @@ public class RokuDevice : Object {
         var session = new Soup.Session();
         var message = new Soup.Message("POST",keypress_url);
 
-        session.queue_message(message, null);
+        session.send_async(message, Priority.DEFAULT, null);
     }
 
-    public void load_current_application(){
+    public async void load_current_application(){
         var app_info_url = "%squery/active-app".printf(_location);
 
         var session = new Soup.Session();
         var message = new Soup.Message("GET",app_info_url);
+        
+        var stream = yield session.send_async(message, Priority.DEFAULT, null);
 
-        session.queue_message(message,current_application_callback);
-    }
-
-    private void current_application_callback(Soup.Session session, Soup.Message message){
-        var memory_input_stream = new MemoryInputStream.from_data(message.response_body.data);
-
-        var document = new GXml.Document.from_stream(memory_input_stream);
+        var document = new GXml.Document.from_stream(stream);
         var app_node = document.query_selector("app");
 
         application_name = app_node.text_content;
-    }
-
-    private async string? http_get_string_async (string url) throws Gee.FutureError {
-
-        print ("fetching url %s\n", url);
-
-        var message = new Soup.Message ("GET", url);
-
-        var message_promise = new Gee.Promise<string?> ();
-
-        _session.queue_message(message, (sess,mess) => {
-
-            print("received message for %s, status code: %u\n",usn,mess.status_code);
-
-            var is_successful = mess.status_code >= 200 && mess.status_code < 300;
-
-            if (!is_successful) {
-                print ("did not receive success status. not proceeding\n");
-
-                message_promise.set_value (null);
-
-                return;
-            }
-
-            var response_data = (string)mess.response_body.data;
-
-            print ("received response: %s\n", response_data);
-
-            message_promise.set_value (response_data);
-        });
-
-        var value = yield message_promise.future.wait_async ();
-
-        print ("future resolved\n");
-
-        return value;
     }
 }

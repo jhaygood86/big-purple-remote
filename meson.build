@@ -31,9 +31,9 @@ bigpurpleremote_deps = [
     dependency('libhandy-1', version: '>=0.90.0'),
     dependency('granite', version: '>=6.0.0'),
     dependency('gee-0.8'),
-    dependency('libsoup-2.4', version: '>= 2.62'),
-    dependency('gssdp-1.2', version: '>= 1.0.0'),
-    dependency('gupnp-1.2', version: '>= 1.0.0'),
+    dependency('libsoup-3.0', version: '>= 3.00'),
+    dependency('gssdp-1.6', version: '>= 1.0.0'),
+    dependency('gupnp-1.6', version: '>= 1.0.0'),
     dependency('gxml-0.20')
 ]
 
